@@ -10,32 +10,31 @@ object UserService {
   def apply() = new UserService
 }
 
-class UserService {
+class UserService extends CrudService[User]{
   import UserData.testUsers
 
-  def getUsers = testUsers.toList
+  override def getAll = testUsers.toList
 
-  def getUserById(userId: Long) = testUsers.find(_.id == Some(userId))
+  override def findById(userId: Long) = testUsers.find(_.id == Some(userId))
 
-  def addUser(user: User) = {
+  override def add(user: User) = {
     val maxId = testUsers.map(_.id).flatten.max + 1
     val newUser = user.copy(id = Some(maxId))
     testUsers += newUser
     newUser
   }
 
-  def updateUser(user: User) = {
-    testUsers.indexWhere(_.id == user.id) match {
-      case -1 => false
-      case i => testUsers.update(i, user); true
+  override def update(entityId : Long, user: User) = {
+    testUsers.indexWhere(_.id == Some(entityId)) match {
+      case -1 => throw new IllegalStateException(s"User with id: ${entityId} not found")
+      case i => testUsers.update(i, user); getById(entityId)
     }
   }
 
-  def deleteUser(userId: Long) = {
-    getUserById(userId) match {
+  override def delete(userId: Long) = {
+    findById(userId) match {
       case Some(user) => testUsers -= user
       case None =>
     }
   }
-
 }

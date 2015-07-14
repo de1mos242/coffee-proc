@@ -7,7 +7,7 @@ import spray.routing.HttpService
  * Factory method for Props configuration files for actors
  */
 object ApiRouterActor {
-  def props(userRoute: ActorRef): Props = Props(new ApiRouterActor(userRoute))
+  def props(userRoute: ActorRef, purchaseRoute: ActorRef): Props = Props(new ApiRouterActor(userRoute, purchaseRoute))
 }
 
 /**
@@ -21,18 +21,30 @@ object ApiRouterActor {
  *
  * To run the front end app in dev mode change "dist" to "app"
  */
-class ApiRouterActor(userRoute: ActorRef) extends Actor
-with HttpService
-with ActorLogging {
+class ApiRouterActor(userRoute: ActorRef, purchaseRoute: ActorRef) extends Actor with HttpService with ActorLogging {
 
   def actorRefFactory = context
   def receive = runRoute {
+    val staticPath = "app"
+    val indexLocation = s"${staticPath}/index.html"
     compressResponseIfRequested() {
       pathPrefix("api") {
         pathPrefix("user") { ctx => userRoute ! ctx }
       } ~
+      pathPrefix("api") {
+        pathPrefix("purchase") { ctx => purchaseRoute ! ctx }
+      } ~
+      pathPrefix("users") {
+        getFromFile(indexLocation)
+      } ~
+      pathPrefix("purchases") {
+        getFromFile(indexLocation)
+      } ~
+      pathEnd {
+        getFromFile(indexLocation)
+      } ~
         //getFromResourceDirectory("dist")
-      getFromResourceDirectory("app")
+      getFromResourceDirectory(staticPath)
     }
 
   }

@@ -1,7 +1,7 @@
 package net.de1mos.procoffee.config
 
 import akka.actor.ActorSystem
-import net.de1mos.procoffee.actors.routes.{UserRoute, ApiRouterActor}
+import net.de1mos.procoffee.actors.routes.{PurchaseRoute, UserRoute, ApiRouterActor}
 
 /**
 * Factory method for ActorSystemBean class
@@ -20,6 +20,8 @@ class ActorSystemBean {
 
   //lazy val personRoute = system.actorOf(PersonRoute.props, "person-route")
   lazy val userRoute = system.actorOf(UserRoute.props, "user-route")
-  lazy val apiRouterActor = system.actorOf(ApiRouterActor.props(userRoute), "api-router")
+  lazy val purchaseRoute = system.actorOf(PurchaseRoute.props, "purchase-route")
+  lazy val routes = ApiRouterActor.props(userRoute, purchaseRoute)
+  lazy val apiRouterActor = system.actorOf(routes, "api-router")
 
 }

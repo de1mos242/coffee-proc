@@ -5,8 +5,6 @@ import spray.json.DefaultJsonProtocol
 /**
  * Created by Unknown on 06.07.2015.
  */
-case class User(id: Option[Long], firstName: String, lastName: String)
+case class User(id: Option[Long], firstName: String, lastName: String) extends BaseEntity
 
-object UserJsonProtocol extends DefaultJsonProtocol{
-  implicit val userFormat = jsonFormat3(User)
-}
+
