@@ -1,0 +1,20 @@
+<h1>Активность участника: {{user.lastName + ' ' + user.firstName}}</h1>
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>С</th>
+        <th>По</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="activity in userActivities">
+        <td>{{activity.activityStart | date}}</td>
+        <td>{{activity.activityFinish | date}}</td>
+        <td><a href="user-activities/edit/{{activity.id}}" class="btn btn-warning">Изменить</a> </td>
+        <td><a href="user-activities/delete/{{activity.id}}" class="btn btn-danger">Удалить</a> </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/user-activities/new" class="btn btn-default">Добавить участие</a>

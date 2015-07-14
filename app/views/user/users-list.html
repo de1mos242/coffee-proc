@@ -1,14 +1,17 @@
 <table class="table table-striped table-hover">
     <thead>
         <tr>
-            <th>First name</th>
-            <th>Last name</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Участие</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="user in users">
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
+            <td><a href="user-activities/{{user.id}}" class="btn btn-default">
+                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a> </td>
         </tr>
     </tbody>
 </table>

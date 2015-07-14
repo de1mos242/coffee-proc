@@ -35,6 +35,14 @@ angular.module('de1mos.CoffeeProc', ['ngAnimate', 'ngRoute','ngResource'])
         templateUrl: 'views/purchase/purchase-new.html',
         controller: 'PurchasesNewCtrl'
       })
+      .when('/user-activities/:userId', {
+        templateUrl: 'views/user-activity/user-activity-list.html',
+        controller: 'UserActivitiesCtrl'
+      })
+      .when('/user-activities/:userId/edit/:activityId', {
+        templateUrl: 'views/user-activity/user-activity-edit.html',
+        controller: 'UserActivityEditCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

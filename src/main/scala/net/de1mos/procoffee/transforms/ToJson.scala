@@ -1,9 +1,8 @@
 package net.de1mos.procoffee.transforms
 
-import java.time.{LocalDateTime, LocalDate}
-import java.time.format.DateTimeFormatter
+import java.time.{LocalDate, LocalDateTime}
 
-import net.de1mos.procoffee.domain.{BaseEntity, Purchase, User}
+import net.de1mos.procoffee.domain.{UserActivity, BaseEntity, Purchase, User}
 import spray.httpx.SprayJsonSupport
 import spray.json._
 
@@ -35,5 +34,6 @@ object ToJson extends DefaultJsonProtocol with SprayJsonSupport {
   }
   implicit val userFormat = jsonFormat3(User)
   implicit val purchaseFormat = jsonFormat4(Purchase)
+  implicit val userActivityFormat = jsonFormat4(UserActivity)
 
 }
