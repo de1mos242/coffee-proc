@@ -14,7 +14,7 @@ angular.module('de1mos.CoffeeProc')
       });
     };
     $scope.editUser=function(user){
-      $location.path('/user/' + user.id + '/edit');
+      $location.path($scope.baseUrl + '/users/' + user.id + '/edit');
     };
 
   })
@@ -26,41 +26,34 @@ angular.module('de1mos.CoffeeProc')
 
     $scope.deleteUser=function(user){
       user.$delete(function(){
-          $location.path('/user');
+          $location.path('/users');
       });
     };
     $scope.editUser=function(user){
-      $location.path('/user/' + user.id + '/edit');
+      $location.path($scope.baseUrl + '/users/' + user.id + '/edit');
     };
 
   })
   .controller('UserEditCtrl', function($scope, $rootScope, $location, $routeParams, Users) {
     $rootScope.$path = $location.path.bind($location);
     $scope.user=Users.get({id:$routeParams.id});
-    $scope.canEdit = false;
-    $scope.canDelete = true;
 
-    $scope.deleteUser=function(user){
-      person.$delete(function(){
-          $location.path('/user');
-      });
-    };
     $scope.updateUser=function(){
       $scope.user.$update(function(){
-          $location.path('/user/'+$scope.user.id);
+        console.log("we are going to " + '/users/'+$scope.user.id)
+          $location.path('/users/'+$scope.user.id);
       });
     };
   })
   .controller('UserNewCtrl', function($scope, $rootScope, $location, Users) {
     $rootScope.$path = $location.path.bind($location);
     $scope.user = new Users();
-    $scope.user.date = Date.now();
-    $scope.canEdit = false;
-    $scope.canDelete = false;
+    $scope.user.firstName = "";
+    $scope.user.lastName = "";
 
     $scope.addUser=function(){
       $scope.user.$save(function(){
-        $location.path('/user');
+        $location.path('users');
       });
     };
   });

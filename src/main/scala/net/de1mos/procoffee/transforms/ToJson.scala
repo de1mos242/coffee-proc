@@ -1,6 +1,7 @@
 package net.de1mos.procoffee.transforms
 
-import java.time.{LocalDate, LocalDateTime}
+import java.time.format.DateTimeFormatter
+import java.time.{ZonedDateTime, LocalDate, LocalDateTime}
 
 import net.de1mos.procoffee.domain.{UserActivity, BaseEntity, Purchase, User}
 import spray.httpx.SprayJsonSupport
@@ -16,8 +17,9 @@ object ToJson extends DefaultJsonProtocol with SprayJsonSupport {
 
     override def read(json: JsValue): LocalDate = json match {
       case JsString(jString) => {
-        val dateTime = LocalDateTime.parse(jString)
-        dateTime.toLocalDate
+        ZonedDateTime.parse(jString, DateTimeFormatter.ISO_INSTANT).toLocalDate()
+        //val dateTime = LocalDateTime.parse(jString)
+        //dateTime.toLocalDate
       }
       case _ => deserializationError("String expected while parse LocalDate")
     }

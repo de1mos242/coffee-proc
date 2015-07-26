@@ -1,0 +1,10 @@
+<div class="form-group">
+    <label for="activityStart">С</label>
+    <input type="date" dataformatas="yyyy-MM-dd" max="{{activity.activityFinish}}" ng-model="activity.activityStart" class="form-control" id="activityStart" placeholder="Начало участия" />
+</div>
+<div class="form-group">
+    <label for="activityFinish">По</label>
+    <input type="date" dataformatas="yyyy-MM-dd" min="{{activity.activityStart}}" ng-model="activity.activityFinish" class="form-control" id="activityFinish" placeholder="Завершение участия" />
+</div>
+
+<input type="submit" class="btn btn-primary" value="Сохранить"/>

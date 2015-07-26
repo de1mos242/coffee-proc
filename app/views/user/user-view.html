@@ -1,0 +1,7 @@
+<h1 class="cover-heading">Участник</h1>
+<hr>
+<p class="lead">
+{{user.lastName + ' ' + user.firstName}}
+</p>
+<a href="{{baseUrl}}/users/{{user.id}}/edit" class="btn btn-sm btn-warning">Изменить</a>
+<a ng-click="deleteUser(user)" class="btn btn-sm btn-danger">Удалить </a>

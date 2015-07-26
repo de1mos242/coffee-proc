@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('de1mos.CoffeeProc', ['ngAnimate', 'ngRoute','ngResource'])
+angular.module('de1mos.CoffeeProc', ['ngAnimate', 'ngRoute','ngResource', 'ui.bootstrap'])
 
   .config(function($locationProvider, $routeProvider) {
 
@@ -15,15 +15,15 @@ angular.module('de1mos.CoffeeProc', ['ngAnimate', 'ngRoute','ngResource'])
         templateUrl: 'views/user/users-list.html',
         controller: 'UsersCtrl'
       })
-      .when('/user/new', {
+      .when('/users/new', {
         templateUrl: 'views/user/user-new.html',
         controller: 'UserNewCtrl'
       })
-      .when('/user/:id', {
+      .when('/users/:id', {
         templateUrl: 'views/user/user-view.html',
         controller: 'UserViewCtrl'
       })
-      .when('/user/:id/edit', {
+      .when('/users/:id/edit', {
         templateUrl: 'views/user/user-edit.html',
         controller: 'UserEditCtrl'
       })
@@ -34,6 +34,10 @@ angular.module('de1mos.CoffeeProc', ['ngAnimate', 'ngRoute','ngResource'])
       .when('/purchases/new', {
         templateUrl: 'views/purchase/purchase-new.html',
         controller: 'PurchasesNewCtrl'
+      })
+      .when('/user-activities/:userId/new', {
+        templateUrl: 'views/user-activity/user-activity-new.html',
+        controller: 'UserActivitiesNewCtrl'
       })
       .when('/user-activities/:userId', {
         templateUrl: 'views/user-activity/user-activity-list.html',

@@ -54,10 +54,9 @@ trait CrudRoute[Entity <: BaseEntity, Service <: CrudService[Entity]] extends Ht
       (put & path(LongNumber) & pathEnd) { entityId =>
         entity(getRequestUnmarshaller) { crudEntity =>
           log.debug(s"updating a ${crudEntity.getClass} with the id: ${entityId}")
-          val updatedPerson = crudService.update(entityId, crudEntity)
-          updatedPerson match {
-            case true => complete(StatusCodes.NoContent)
-            case false => complete(StatusCodes.NotFound)
+          crudService.findById(entityId) match {
+            case Some(_) =>  crudService.update(entityId, crudEntity); complete(StatusCodes.NoContent)
+            case None => complete(StatusCodes.NoContent)
           }
         }
       } ~

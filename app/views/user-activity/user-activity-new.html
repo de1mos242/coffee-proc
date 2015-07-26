@@ -1,0 +1,11 @@
+<h1 class="cover-heading">Добавить активность</h1>
+<hr>
+<div>
+    Участник: <span>{{activity.user.lastName + ' ' + activity.user.firstName}}</span>
+</div>
+
+<p class="lead">
+<form class="form-inline" role="form" ng-submit="addActivity()">
+    <div ng-include="'views/user-activity/user-activity-form.html'"></div>
+</form>
+</p>
